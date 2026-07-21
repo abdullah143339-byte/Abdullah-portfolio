@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
+import AFLogo from "./AFLogo";
 import { gsap } from "gsap";
 import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
 import "./styles/Navbar.css";
@@ -43,14 +44,14 @@ const Navbar = () => {
     <>
       <div className="header">
         <a href="/#" className="navbar-title" data-cursor="disable">
-          Logo
+          <AFLogo size={28} /> MUHAMMAD ABDULLAH
         </a>
         <a
-          href="mailto:example@mail.com"
+          href="mailto:abdullah143339@gmail.com"
           className="navbar-connect"
           data-cursor="disable"
         >
-          example@mail.com
+          abdullah143339@gmail.com
         </a>
         <ul>
           <li>

@@ -63,6 +63,35 @@ const Scene = () => {
           scene.add(character);
           headBone = character.getObjectByName("spine006") || null;
           screenLight = character.getObjectByName("screenlight") || null;
+
+          // Try to set smile morph target on any face mesh
+          character.traverse((child) => {
+            const mesh = child as THREE.Mesh;
+            if (mesh.isMesh && mesh.morphTargetDictionary && mesh.morphTargetInfluences) {
+              const smileKeys = [
+                "smile", "Smile", "mouthSmile", "MouthSmile",
+                "mouthSmileLeft", "mouthSmileRight",
+                "cheekSquintLeft", "cheekSquintRight",
+                "viseme_aa", "browOuterUpLeft", "browOuterUpRight",
+              ];
+              smileKeys.forEach((key) => {
+                const idx = mesh.morphTargetDictionary![key];
+                if (idx !== undefined && mesh.morphTargetInfluences) {
+                  mesh.morphTargetInfluences[idx] = 0.55;
+                }
+              });
+            }
+          });
+
+          // Warm peach fill light — gives face a friendly, glowing look
+          const warmFill = new THREE.DirectionalLight(0xffcca0, 0.5);
+          warmFill.position.set(2, 9, 6);
+          scene.add(warmFill);
+
+          // Stylish violet rim light from behind — modern look
+          const rimStyle = new THREE.DirectionalLight(0xb48bff, 0.8);
+          rimStyle.position.set(-4, 5, -5);
+          scene.add(rimStyle);
           progress.loaded().then(() => {
             setTimeout(() => {
               light.turnOnLights();

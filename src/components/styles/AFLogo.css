@@ -1,0 +1,12 @@
+.af-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.af-logo svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

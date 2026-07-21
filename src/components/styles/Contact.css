@@ -27,8 +27,30 @@
   margin-bottom: 20px;
 }
 a.contact-social {
-  font-size: 25px;
+  font-size: 18px;
   border-bottom: 1px solid #ccc;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.25s, border-color 0.25s;
+}
+a.contact-social:hover {
+  color: var(--accentColor);
+  border-color: var(--accentColor);
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.25s;
+}
+.contact-link:hover {
+  color: var(--accentColor);
+}
+
+.contact-footer-logo {
+  margin: 12px 0 8px;
 }
 .contact-box h2 {
   font-weight: 400;
@@ -54,7 +76,7 @@ a.contact-social {
     font-size: 20px;
   }
   a.contact-social {
-    font-size: 22px;
+    font-size: 16px;
   }
 }
 @media only screen and (max-width: 1300px) {
@@ -65,7 +87,7 @@ a.contact-social {
     font-size: 18px;
   }
   a.contact-social {
-    font-size: 20px;
+    font-size: 15px;
   }
   .contact-flex p {
     margin-top: 0px;

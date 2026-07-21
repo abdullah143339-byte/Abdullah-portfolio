@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1200, initial-scale=1.0">
+  <title>Abdullah Fuji - Portfolio Banner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      font-family: 'Geist', system-ui, sans-serif;
+      background: #0b080c;
+      position: relative;
+    }
+
+    /* Animated Gradient Background */
+    .bg-gradient {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(ellipse at 20% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 50%, rgba(194, 164, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 0%, rgba(139, 92, 246, 0.08) 0%, transparent 60%);
+    }
+
+    /* Grid Pattern */
+    .grid-pattern {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(194, 164, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(194, 164, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Floating Code Brackets */
+    .bracket {
+      position: absolute;
+      font-size: 120px;
+      font-weight: 100;
+      color: rgba(194, 164, 255, 0.08);
+      font-family: monospace;
+    }
+    .bracket-1 { top: 40px; left: 60px; transform: rotate(-10deg); }
+    .bracket-2 { bottom: 40px; right: 60px; transform: rotate(10deg); }
+    .bracket-3 { top: 80px; right: 120px; font-size: 80px; opacity: 0.5; }
+    .bracket-4 { bottom: 80px; left: 120px; font-size: 80px; opacity: 0.5; }
+
+    /* Glowing Orb */
+    .orb {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      filter: blur(40px);
+    }
+
+    /* Content Container */
+    .content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px;
+    }
+
+    /* Logo Circle */
+    .logo-container {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid rgba(194, 164, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+      background: rgba(11, 8, 12, 0.8);
+      backdrop-filter: blur(10px);
+      position: relative;
+    }
+
+    .logo-container::before {
+      content: '';
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 1px solid rgba(194, 164, 255, 0.1);
+    }
+
+    .logo-a {
+      font-size: 48px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #c2a4ff, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Name */
+    .name {
+      font-size: 64px;
+      font-weight: 700;
+      color: #eae5ec;
+      text-align: center;
+      letter-spacing: 4px;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .name-accent {
+      background: linear-gradient(135deg, #c2a4ff, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Tagline */
+    .tagline {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(234, 229, 236, 0.6);
+      text-align: center;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    /* Tech Stack Pills */
+    .tech-pills {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .pill {
+      padding: 8px 20px;
+      border-radius: 30px;
+      border: 1px solid rgba(194, 164, 255, 0.2);
+      background: rgba(194, 164, 255, 0.05);
+      color: rgba(234, 229, 236, 0.7);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      backdrop-filter: blur(5px);
+    }
+
+    .pill-accent {
+      border-color: rgba(194, 164, 255, 0.4);
+      background: rgba(194, 164, 255, 0.1);
+      color: #c2a4ff;
+    }
+
+    /* Decorative Lines */
+    .line-left, .line-right {
+      position: absolute;
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(194, 164, 255, 0.3), transparent);
+    }
+    .line-left { left: 60px; top: 50%; }
+    .line-right { right: 60px; top: 50%; }
+
+    /* Corner Accents */
+    .corner {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-color: rgba(194, 164, 255, 0.2);
+      border-style: solid;
+    }
+    .corner-tl { top: 30px; left: 30px; border-width: 2px 0 0 2px; }
+    .corner-tr { top: 30px; right: 30px; border-width: 2px 2px 0 0; }
+    .corner-bl { bottom: 30px; left: 30px; border-width: 0 0 2px 2px; }
+    .corner-br { bottom: 30px; right: 30px; border-width: 0 2px 2px 0; }
+
+    /* Dots Pattern */
+    .dots {
+      position: absolute;
+      bottom: 50px;
+      display: flex;
+      gap: 8px;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(194, 164, 255, 0.3);
+    }
+    .dot-active {
+      background: #c2a4ff;
+      box-shadow: 0 0 10px rgba(194, 164, 255, 0.5);
+    }
+
+    /* Code Snippet Decoration */
+    .code-deco {
+      position: absolute;
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: rgba(194, 164, 255, 0.15);
+      line-height: 1.6;
+    }
+    .code-left {
+      left: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: left;
+    }
+    .code-right {
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: right;
+    }
+
+    /* Bottom Bar */
+    .bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #c2a4ff, #8b5cf6, #c2a4ff, transparent);
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="grid-pattern"></div>
+  <div class="orb"></div>
+
+  <!-- Floating Brackets -->
+  <div class="bracket bracket-1">&lt;</div>
+  <div class="bracket bracket-2">/&gt;</div>
+  <div class="bracket bracket-3">{</div>
+  <div class="bracket bracket-4">}</div>
+
+  <!-- Corner Accents -->
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <!-- Decorative Lines -->
+  <div class="line-left"></div>
+  <div class="line-right"></div>
+
+  <!-- Code Snippets -->
+  <div class="code-deco code-left">
+    const dev = {<br>
+    &nbsp;&nbsp;name: "Abdullah",<br>
+    &nbsp;&nbsp;passion: "Code",<br>
+    &nbsp;&nbsp;level: "∞"<br>
+    };
+  </div>
+  <div class="code-deco code-right">
+    while(alive) {<br>
+    &nbsp;&nbsp;eat();<br>
+    &nbsp;&nbsp;sleep();<br>
+    &nbsp;&nbsp;code();<br>
+    }
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <div class="logo-container">
+      <span class="logo-a">A</span>
+    </div>
+    
+    <div class="name">
+      ABDULLAH <span class="name-accent">FUJI</span>
+    </div>
+    
+    <div class="tagline">Developer &amp; Programmer</div>
+    
+    <div class="tech-pills">
+      <span class="pill pill-accent">React</span>
+      <span class="pill">Node.js</span>
+      <span class="pill">TypeScript</span>
+      <span class="pill pill-accent">Three.js</span>
+      <span class="pill">Next.js</span>
+      <span class="pill">MongoDB</span>
+    </div>
+  </div>
+
+  <!-- Bottom Dots -->
+  <div class="dots" style="left: 50%; transform: translateX(-50%);">
+    <div class="dot"></div>
+    <div class="dot dot-active"></div>
+    <div class="dot"></div>
+  </div>
+
+  <!-- Bottom Gradient Bar -->
+  <div class="bottom-bar"></div>
+</body>
+</html>

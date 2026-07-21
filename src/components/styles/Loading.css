@@ -197,6 +197,8 @@
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.2px;
+  display: inline-flex;
+  align-items: center;
 }
 @keyframes blink {
   0% {
