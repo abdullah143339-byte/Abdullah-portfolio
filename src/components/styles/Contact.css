@@ -32,11 +32,14 @@ a.contact-social {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: color 0.25s, border-color 0.25s;
+  transition: color 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
 }
 a.contact-social:hover {
   color: var(--accentColor);
   border-color: var(--accentColor);
+  transform: translateX(4px);
 }
 
 .contact-link {

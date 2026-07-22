@@ -32,6 +32,12 @@ h6 {
 }
 html {
   scroll-behavior: smooth;
+  overscroll-behavior: none;
+}
+*,
+*::before,
+*::after {
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 a {
   color: inherit;
@@ -68,6 +74,8 @@ body {
 .main-body {
   max-width: 100vw;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  will-change: scroll-position;
 }
 
 .container-main {

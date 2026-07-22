@@ -21,6 +21,7 @@
   letter-spacing: 7px;
   font-weight: 400;
   color: var(--accentColor);
+  transition: color 0.35s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .about-me p {

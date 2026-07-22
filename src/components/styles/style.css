@@ -3,10 +3,12 @@
   display: flex;
   text-wrap: nowrap;
   overflow: hidden;
+  cursor: pointer;
 }
 .hover-in {
   position: relative;
-  transition: 0.3s;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
 }
 .hover-in div {
   display: flex;

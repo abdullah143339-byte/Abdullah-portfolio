@@ -41,7 +41,12 @@
   display: flex;
   font-size: 23px;
   will-change: left, top;
-  transition: transform 0.3s ease-out;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    color 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.social-icons a:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+  color: var(--accentColor);
 }
 .resume-button {
   position: absolute;
@@ -58,12 +63,14 @@
   font-weight: 600;
   color: #5e5e5e;
   cursor: pointer;
-  transition: 0.5s;
+  transition: color 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+    transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   transform-origin: left bottom;
   transform: translateX(100%) rotateZ(-90deg);
 }
 .resume-button:hover {
   color: #fff;
+  transform: translateX(100%) rotateZ(-90deg) translateX(-5px);
 }
 div.resume-button span {
   color: #fff;

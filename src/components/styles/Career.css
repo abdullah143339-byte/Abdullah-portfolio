@@ -39,6 +39,10 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 50px;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.career-info-box:hover {
+  transform: translateX(4px);
 }
 .career-info-box p {
   width: 40%;
