@@ -13,12 +13,14 @@ export class SplitText {
   lines: HTMLElement[] = [];
   private originals: HTMLElement[] = [];
 
-  constructor(target: string | HTMLElement | HTMLElement[], options: SplitOptions = {}) {
+  constructor(target: string | string[] | HTMLElement | HTMLElement[], options: SplitOptions = {}) {
     const type = options.type || "chars";
     const targets = typeof target === "string"
       ? Array.from(document.querySelectorAll<HTMLElement>(target))
       : Array.isArray(target)
-        ? [...target]
+        ? target.flatMap((t) => typeof t === "string"
+            ? Array.from(document.querySelectorAll<HTMLElement>(t))
+            : [t])
         : [target];
 
     targets.forEach((el) => {
