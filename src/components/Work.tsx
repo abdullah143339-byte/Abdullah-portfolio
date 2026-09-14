@@ -76,11 +76,12 @@ const PROJECTS: ProjectData[] = [
       "An intelligent conversational AI chatbot with natural language processing, context awareness, and multi-domain knowledge support powered by modern LLM APIs.",
     image: "/images/DEFY pic.png",
     colorKey: 2,
-    stats: { status: "AI Project", progress: 80 },
+    stats: { status: "Live AI Project", progress: 80 },
     features: [
       { label: "NLP Power", value: 94, icon: FaBrainIcon },
       { label: "Context Memory", value: 90, icon: FaComments },
     ],
+    url: "https://defy-chat.vercel.app",
   },
   {
     id: "aiforge",
