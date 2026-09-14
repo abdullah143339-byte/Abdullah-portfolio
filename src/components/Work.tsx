@@ -1,6 +1,17 @@
-import { useState, type ComponentType } from "react";
+import { useState, useCallback, type ComponentType } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
-import { FaCubes, FaGamepad, FaRulerCombined, FaBrain, FaComments, FaMagic, FaChartLine, FaCube, FaWaveSquare, FaArrowRight, FaSlidersH } from "react-icons/fa";
+import {
+  FaCubes,
+  FaGamepad,
+  FaRulerCombined,
+  FaComments,
+  FaMagic,
+  FaChartLine,
+  FaBrain as FaBrainIcon,
+  FaArrowRight,
+  FaArrowLeft,
+  FaExternalLinkAlt,
+} from "react-icons/fa";
 import { MdRadar } from "react-icons/md";
 import "./styles/Work.css";
 
@@ -20,11 +31,9 @@ interface ProjectData {
   description: string;
   image: string;
   colorKey: number;
-  stats: {
-    status: string;
-    progress: number;
-  };
+  stats: { status: string; progress: number };
   features: FeatureMetric[];
+  url?: string;
 }
 
 const PROJECTS: ProjectData[] = [
@@ -69,7 +78,7 @@ const PROJECTS: ProjectData[] = [
     colorKey: 2,
     stats: { status: "AI Project", progress: 80 },
     features: [
-      { label: "NLP Power", value: 94, icon: FaBrain },
+      { label: "NLP Power", value: 94, icon: FaBrainIcon },
       { label: "Context Memory", value: 90, icon: FaComments },
     ],
   },
@@ -89,19 +98,36 @@ const PROJECTS: ProjectData[] = [
     ],
   },
   {
-    id: "portfolio3d",
-    label: "3D Web",
-    category: "Web Development",
-    title: "3D Portfolio Website",
+    id: "zarya",
+    label: "ZARYA",
+    category: "AI Social Media Platform",
+    title: "ZARYA — Think Beyond Social",
     description:
-      "An interactive 3D portfolio featuring a rigged character model, smooth scroll animations, cinematic GSAP transitions, and a physics-based tech stack visualization.",
-    image: "/images/portolio.png",
+      "An AI-first social ecosystem combining social interaction, AI learning, creative communities, marketplace, portfolio, and real-time messaging in one platform.",
+    image: "/images/zarya.png",
     colorKey: 4,
-    stats: { status: "Live Website", progress: 100 },
+    stats: { status: "Live Platform", progress: 85 },
     features: [
-      { label: "3D Performance", value: 96, icon: FaCube },
-      { label: "Smoothness", value: 93, icon: FaWaveSquare },
+      { label: "AI Integration", value: 92, icon: FaBrainIcon },
+      { label: "Social Features", value: 96, icon: FaMagic },
     ],
+    url: "https://futureai-gamma.vercel.app",
+  },
+  {
+    id: "jarvis",
+    label: "JARVIS",
+    category: "AI Desktop Assistant",
+    title: "J.A.R.V.I.S",
+    description:
+      "A personal Iron Man-style AI desktop assistant with voice-first conversation, transparent HUD display, Claude-powered agentic brain, and persistent memory vault.",
+    image: "/images/jarvis.svg",
+    colorKey: 5,
+    stats: { status: "Open Source", progress: 78 },
+    features: [
+      { label: "Voice Intelligence", value: 90, icon: FaBrainIcon },
+      { label: "HUD Performance", value: 88, icon: FaChartLine },
+    ],
+    url: "https://github.com/Saic2605/jarvis",
   },
 ];
 
@@ -125,12 +151,11 @@ const ANIMATIONS: { container: Variants; item: Variants; image: Variants } = {
     exit: { opacity: 0, y: -10, filter: "blur(5px)" },
   },
   image: {
-    initial: { opacity: 0, scale: 1.5, filter: "blur(15px)", rotate: -30, x: -80 },
+    initial: { opacity: 0, scale: 1.5, filter: "blur(15px)", x: -80 },
     animate: {
       opacity: 1,
       scale: 1,
       filter: "blur(0px)",
-      rotate: 0,
       x: 0,
       transition: { type: "spring", stiffness: 260, damping: 20 },
     },
@@ -206,7 +231,7 @@ const ProjectDetails = ({ data }: { data: ProjectData }) => (
       {data.description}
     </motion.p>
 
-    <motion.div variants={ANIMATIONS.item} className={`feature-grid fg-${data.colorKey}`}>
+    <motion.div variants={ANIMATIONS.item} className={`feature-grid`}>
       {data.features.map((feature, idx) => (
         <div className="feature-item" key={feature.label}>
           <div className="feature-header">
@@ -228,51 +253,36 @@ const ProjectDetails = ({ data }: { data: ProjectData }) => (
       ))}
 
       <div className="specs-row">
-        <span className="specs-btn">
-          <FaSlidersH size={13} /> View Live
-          <FaArrowRight size={13} className="specs-arrow" />
-        </span>
+        {data.url ? (
+          <a
+            className="specs-btn is-link"
+            href={data.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaExternalLinkAlt size={12} /> View Live
+            <FaArrowRight size={12} className="specs-arrow" />
+          </a>
+        ) : (
+          <span className="specs-btn is-coming">
+            Coming Soon
+            <FaArrowRight size={12} className="specs-arrow" />
+          </span>
+        )}
       </div>
     </motion.div>
   </motion.div>
 );
 
-const Switcher = ({
-  activeId,
-  onToggle,
-}: {
-  activeId: string;
-  onToggle: (id: string) => void;
-}) => (
-  <div className="switcher-wrap">
-    <motion.div layout className="switcher">
-      {PROJECTS.map((project) => (
-        <motion.button
-          key={project.id}
-          onClick={() => onToggle(project.id)}
-          whileTap={{ scale: 0.96 }}
-          className={`switcher-btn pv-${project.colorKey}`}
-          type="button"
-        >
-          {activeId === project.id && (
-            <motion.span
-              layoutId="island-surface"
-              className="switcher-active"
-              transition={{ type: "spring", stiffness: 220, damping: 22 }}
-            />
-          )}
-          <span className={`switcher-label ${activeId === project.id ? "active" : ""}`}>
-            {project.label}
-          </span>
-        </motion.button>
-      ))}
-    </motion.div>
-  </div>
-);
-
 const Work = () => {
-  const [activeId, setActiveId] = useState<string>(PROJECTS[0].id);
-  const current = PROJECTS.find((p) => p.id === activeId)!;
+  const [index, setIndex] = useState(0);
+  const total = PROJECTS.length;
+  const current = PROJECTS[index];
+
+  const go = useCallback(
+    (delta: number) => setIndex((i) => (i + delta + total) % total),
+    [total]
+  );
 
   return (
     <div className="work-section" id="work">
@@ -285,6 +295,16 @@ const Work = () => {
       </div>
 
       <main className={`showcase-main pv-${current.colorKey}`}>
+        <div className="nav-side nav-left">
+          <button
+            type="button"
+            className="nav-arrow"
+            onClick={() => go(-1)}
+          >
+            <FaArrowLeft size={20} />
+          </button>
+        </div>
+
         <motion.div
           layout
           transition={{ type: "spring", bounce: 0, duration: 0.9 }}
@@ -297,9 +317,48 @@ const Work = () => {
             </AnimatePresence>
           </motion.div>
         </motion.div>
+
+        <div className="nav-side nav-right">
+          <button
+            type="button"
+            className="nav-arrow"
+            onClick={() => go(1)}
+          >
+            <FaArrowRight size={20} />
+          </button>
+        </div>
       </main>
 
-      <Switcher activeId={activeId} onToggle={setActiveId} />
+      <div className="showcase-bottom">
+        <span className="showcase-counter">
+          0{index + 1} <span className="counter-sep">/</span> 0{total}
+        </span>
+
+        <div className="switcher-wrap">
+          <motion.div layout className="switcher">
+            {PROJECTS.map((project, i) => (
+              <motion.button
+                key={project.id}
+                onClick={() => setIndex(i)}
+                whileTap={{ scale: 0.96 }}
+                className={`switcher-btn pv-${project.colorKey}`}
+                type="button"
+              >
+                {index === i && (
+                  <motion.span
+                    layoutId="island-surface"
+                    className="switcher-active"
+                    transition={{ type: "spring", stiffness: 220, damping: 22 }}
+                  />
+                )}
+                <span className={`switcher-label ${index === i ? "active" : ""}`}>
+                  {project.label}
+                </span>
+              </motion.button>
+            ))}
+          </motion.div>
+        </div>
+      </div>
     </div>
   );
 };
